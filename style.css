@@ -453,10 +453,12 @@ em { font-style: italic; }
 /* --- Card Grid Layout (Ensure this exists) --- */
 /* You might have used .project-grid or similar */
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* This ensures 3 equal columns */
-    gap: 1.5rem;
+    display: flex; /* Changed from grid to flex */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Optional: hide vertical scrollbar on the container */
+    gap: 1.5rem; /* Adjust gap as needed for spacing between cards */
     margin-top: 2rem;
+    padding-bottom: 1rem; /* Add some padding at the bottom if cards are tall, to make scrollbar look better */
 }
 
 #publications .subsection h3 {
@@ -515,18 +517,20 @@ em { font-style: italic; }
 
 /* --- Card Style (Ensure this exists - Dark Theme version) --- */
 .card {
-    /* Use the lighter off-white for the card background */
+    /* Previous styles */
     background-color: var(--color-card-bg);
-    /* Remove the dark border or set to none */
-    border: 1rem;
-    /* Alternatively, use a very subtle light border: border: 1px solid #D8DAD5; */
+    /* border: 1rem; /* This was likely an error in your original CSS, consider changing to 'border: 1px solid var(--color-border);' or removing if no border is desired */
     border-radius: 8px;
     padding: 1.5rem;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Changed transition */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    /* Set default text color inside the card to dark */
-    color: #153243; /* Darkest Blue for main text */
+    flex-direction: column;
+    color: #153243;
+
+    /* New/Modified styles for fixed size and horizontal scrolling behavior */
+    width: 500px; /* Example: Card width is 75% of the viewport width. Adjust as needed. */
+    height: 300px; /* Example: Fixed height for cards. Adjust as needed (e.g., 45vh). */
+    flex-shrink: 0; /* Prevent cards from shrinking */
 }
 
 .card:hover {
@@ -537,7 +541,6 @@ em { font-style: italic; }
 
 /* --- Styles for Content INSIDE Publication Cards --- */
 .card h4 { /* Title */
-    /* Use the secondary dark blue for the title */
     color: #284B63;
     margin-bottom: 0.75rem;
     font-size: 1.15rem;
@@ -545,7 +548,6 @@ em { font-style: italic; }
 }
 
 .card p { /* General paragraphs within the card */
-    /* Ensure general text uses the card's default dark color */
     color: #153243;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
@@ -554,7 +556,6 @@ em { font-style: italic; }
 
 .card p.authors,
 .card p.publication-details {
-    /* Use the secondary dark blue for less emphasis */
     color: #284B63;
     font-size: 0.9rem;
     margin-bottom: 0.5rem; /* Consistent spacing */
@@ -566,11 +567,9 @@ em { font-style: italic; }
 .card p.publication-details em {
     font-style: italic; /* Keep italics for journal/conference */
 }
-
 .card .card-links {
     margin-top: auto; /* Push links to the bottom */
     padding-top: 1rem; /* Add space above links */
-    /* Use a light gray separator line */
     border-top: 1px solid #CFDBD5; /* Light Gray separator */
     display: flex;
     flex-wrap: wrap;
@@ -578,7 +577,6 @@ em { font-style: italic; }
 }
 
 .card .card-links a.card-link {
-    /* Keep using the primary accent for links */
     color: var(--color-primary-accent);
     font-weight: 600;
     text-decoration: underline;
@@ -586,7 +584,6 @@ em { font-style: italic; }
     margin: 0;
 }
 .card .card-links a.card-link:hover {
-    /* Use the darker accent for hover */
     color: var(--color-primary-accent-darker);
     text-decoration: none;
 }
