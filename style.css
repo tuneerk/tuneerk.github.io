@@ -1,0 +1,664 @@
+/* --- CSS Variables --- DARK THEME --- */
+:root {
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+
+    /* Refined Palette Assignments */
+    /* Backgrounds */
+    --color-background: #FFFFFF;           /* Darkest Blue: Main page background */
+    --color-background-alt: #F8F9FA;       /* Lighter Dark Blue: Header, footer, alt sections */
+    --color-card-bg: #e7eef8;              /* Lighter Dark Blue: Background for cards */
+
+    /* Text */
+    --color-text: #212529;                 /* Brightest Off-White: Main text color */
+    --color-footer-text: #495057;         /* Slightly less bright Off-White: Footer, less important text */
+    --color-button-primary-text: #FFFFFF;  /* Darkest Blue: Text on primary buttons for contrast */
+
+    /* Accents & Links */
+    --color-primary-accent: #3E96F4;       /* Sage: Main accent, links, primary button background */
+    --color-primary-accent-darker: #2779BD; /* Darker Sage: Hover state for accent elements */
+    --color-link-hover-bg: rgba(62, 150, 244, 0.1); /* Subtle Sage background on link hover */
+
+    /* Borders & Utility */
+    --color-border: #DEE2E6;  
+    --color-shadow: rgba(0, 0, 0, 0.1);             /* Derived Mid-Blue: Subtle borders (lighter shade of #284B63) */
+    --color-white: #FFFFFF;                 /* Pure White: Keep for specific high-contrast needs */
+
+    /* Layout Variables */
+    --header-height: 70px;
+    --footer-height: 60px;
+    --section-padding: 3rem 1.5rem; /* Adjusted from 4rem 2rem to be slightly less */
+    --border-radius: 6px; /* Slightly more rounded corners */
+    --max-width-container: 1100px;
+}
+
+/* --- Basic Reset & Global Styles --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text); /* Dark Theme: Light Text */
+    background-color: var(--color-background); /* Dark Theme: Dark Background */
+    line-height: 1.7;
+    padding-top: var(--header-height); /* Offset for fixed header */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Ensure main content pushes footer down */
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--color-text); /* Dark Theme: Light Text */
+}
+h1 { font-size: 2.8rem; margin-bottom: 1.5rem; }
+h2 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.6rem; margin-top: 2rem; margin-bottom: 1rem; color: #CED4DA; /* Slightly brighter light text for h3 */ }
+h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+p { margin-bottom: 1rem; }
+a { color: var(--color-primary-accent); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--color-primary-accent-darker); text-decoration: none; }
+ul { list-style-position: inside; margin-bottom: 1rem; padding-left: 0.5rem; color: var(--color-text); } /* Ensure list text is light */
+li { margin-bottom: 0.5rem; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+/* --- Utility Classes --- */
+.container {
+    max-width: var(--max-width-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Added border-color */
+    border: 1px solid transparent;
+}
+.btn-primary { /* Accent button */
+    background-color: var(--color-primary-accent);
+    color: var(--color-white); /* White text on accent bg */
+    border-color: var(--color-primary-accent);
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-accent-darker);
+    border-color: var(--color-primary-accent-darker);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+.btn-secondary { /* Secondary button for dark theme */
+    background-color: transparent;
+    color: var(--color-text); /* Light text */
+    border: 1px solid var(--color-border); /* Use dark border */
+}
+.btn-secondary:hover {
+    background-color: var(--color-border); /* Use border color as subtle background */
+    border-color: var(--color-footer-text); /* Slightly lighter border on hover */
+    color: var(--color-white); /* Brighter text on hover */
+    transform: translateY(-2px);
+}
+.sr-only { /* For accessibility */
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* --- Header & Navigation (Fixed) --- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--color-background-alt); /* Dark Theme: Alt dark background */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */ /* Remove light shadow */
+    border-bottom: 1px solid var(--color-border); /* Add subtle border */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Keep using center alignment */
+    width: 100%;
+    max-width: var(--max-width-container);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.site-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text); /* Dark Theme: Light text */
+    cursor: pointer;
+    margin: 0;
+    /* Padding fix for vertical alignment */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    line-height: 1;
+}
+.site-title:hover { color: var(--color-text); } /* Keep text color same on hover */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav .nav-list { /* Removed duplicate rule */
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav .nav-link {
+    font-family: var(--font-heading);
+    color: var(--color-text); /* Dark Theme: Light text */
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    background-color: transparent;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Underline Pseudo-Element */
+.main-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 3px;
+    background-color: var(--color-primary-accent); /* Underline uses accent */
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover State */
+.main-nav .nav-link:hover {
+    color: var(--color-primary-accent); /* Accent text color on hover */
+    /* Optional: Add subtle bg on hover */
+    /* background-color: var(--color-link-hover-bg); */
+}
+.main-nav .nav-link:hover::after {
+    transform: scaleX(1); /* Show underline on hover */
+}
+
+/* Active (Selected) State */
+.main-nav .nav-link.active {
+    color: var(--color-primary-accent); /* Accent text color when active */
+    font-weight: 700;
+}
+.main-nav .nav-link.active::after {
+    transform: scaleX(1); /* Show underline when active */
+}
+
+/* --- Hamburger Menu --- */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+.nav-toggle i { font-size: 1.5rem; color: var(--color-text); } /* Dark Theme: Light icon */
+
+/* --- Sections --- */
+.section { padding: 4rem 0; }
+.section-alt { background-color: var(--color-background-alt); /* Dark Theme: Alt dark bg */ }
+.section-hero {
+    /* --- UPDATED BACKGROUND --- */
+    /* Apply a semi-transparent dark overlay on top of the image */
+    /* Replace 'path/to/your/hero-image.jpg' with the actual path to YOUR image */
+    background-color: var(--color-background-alt);
+
+    /* Ensure the image covers the area, is centered, and doesn't repeat */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* --- END OF BACKGROUND UPDATES --- */
+
+    /* Keep existing styles for text color, layout, etc. */
+    color: var(--color-text); /* Base text color (light) */
+    text-align: center;
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center;
+    justify-content: center;
+    min-height: calc(60vh - var(--header-height)); /* Adjust height as needed */
+}
+
+/* Ensure Hero text remains highly visible */
+.section-hero h1 {
+    color: var(--color-text); /* Keep bright white */
+    font-size: 3.5rem;
+    margin-bottom: 1rem; /* Reduced margin slightly */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Optional: subtle shadow for text pop */
+}
+
+.section-hero .subtitle {
+    font-size: 1.3rem;
+    color: var(--color-footer-text); /* Use lighter gray */
+    margin-bottom: 2rem;
+     text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Optional: subtle shadow for text pop */
+}
+
+/* --- Content Section Visibility Control --- */
+.content-section { display: none; }
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- Specific Section/Component Styles --- */
+.profile-photo {
+    max-width: 200px; height: auto; border-radius: 50%;
+    float: right; margin-left: 2rem; margin-bottom: 1rem;
+    border: 3px solid var(--color-border); /* Use dark theme border */
+}
+.subsection {
+    margin-top: 2.5rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border); /* Use dark theme border */
+}
+.subsection:first-of-type { margin-top: 1.5rem; padding-top: 0; border-top: none; }
+
+.publication-list li { margin-bottom: 0.8rem; line-height: 1.5; color: var(--color-text); } /* Ensure light text */
+.publication-list a { margin-left: 0.8rem; font-size: 0.9em; white-space: nowrap; }
+
+.publication-list li a {
+    margin-left: 0rem; /* Remove default left margin from general 'a' */
+    margin-right: 0rem;
+}
+.publication-list li p {
+    margin-left: 1.25rem; /* Remove default left margin from general 'a' */
+    margin-right: 0.75rem; /* Add space between links */
+    margin-bottom:0rem
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.gallery-item img {
+    display: block; width: 100%; height: auto; border-radius: 5px;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */ /* Remove shadow */
+    border: 1px solid var(--color-border); /* Add border for dark theme */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.gallery-item img:hover { transform: scale(1.03); border-color: #555; }
+
+/* --- Timeline Styles --- Enhanced Aesthetics --- */
+/* --- Timeline Styles --- Alignment Correction --- */
+.timeline {
+    list-style: none;
+    padding-left: 25px;
+    margin-left: 10px;
+    margin-top: 2.5rem;
+    position: relative;
+    border-left: 2px solid #CED4DA; /* Light Theme Line Color */
+    box-sizing: border-box; /* Explicit Box Sizing */
+}
+
+.timeline li {
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-left: 35px;
+    box-sizing: border-box; /* Explicit Box Sizing */
+}
+
+/* The bullet point: */
+.timeline li::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box; /* Ensure border is included in width/height */
+
+    /* Vertical alignment - adjust if needed */
+    top: 0.01em;
+
+    /* Horizontal positioning - Recalculated */
+    left: -26px; /* Adjusted from -27px to better center on the timeline bar */
+    transform: translateX(-50%); /* Center the bullet based on its own width */
+
+    width: 18px; /* Bullet diameter */
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--color-background); /* Match page background */
+    border: 3px solid var(--color-primary-accent); /* Use accent color for border */
+    z-index: 1;
+    transition: transform 0.2s ease-out;
+}
+
+.timeline li:last-child::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;       /* Adjust size as needed */
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid var(--color-primary-accent); /* Arrow color, adjust size as needed */
+
+    /* Vertically align arrow with the dot */
+    /* Dot's top: 0.2em, height: 18px. Arrow's drawn height: 14px (7px+7px). */
+    /* To center: dot_top + (dot_height/2) - (arrow_height/2) */
+    top: calc(0.05em + (18px / 2) - (14px / 2)); /* Simplified: calc(0.2em + 2px) */
+
+    /* Horizontally position arrow to the right of the dot */
+    /* Dot's new 'left' for center is -24px. Dot radius is 9px. */
+    /* Arrow's tip (its 'left' for a right-pointing CSS arrow) starts at dot's right edge + gap */
+    left: calc(-24px + (18px / 2) + 3px); /* Approx. -12px. (dot_center_x + dot_radius + 3px_gap) */
+    z-index: 1; /* Ensure visibility, same as dot */
+}
+
+/* Hover effect */
+.timeline li:hover::before {
+    transform: translateX(-50%) scale(1.15); /* Keep centering transform */
+}
+
+/* Rest of timeline styles (.timeline-date, .timeline-content, etc.) */
+/* ... */
+
+/* Styling for the date/year */
+.timeline-date {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: #6c757d; /* Muted dark gray */
+    margin-bottom: 0.5rem; /* Space below date */
+    letter-spacing: 0.5px;
+    /* text-transform: uppercase; */ /* Optional: Uppercase */
+}
+
+/* Styling for the content block */
+.timeline-content {
+    position: relative; /* Optional: for potential future positioning */
+}
+
+.timeline-content h4 {
+    font-size: 1.15rem; /* Title size */
+    font-weight: 700; /* Bolder title */
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+}
+
+.timeline-content p {
+    font-size: 1rem; /* Main text size */
+    margin-bottom: 0;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+.section-header-split { /* For Resume H2 + Button */
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
+}
+.section-header-split h2 { margin-bottom: 0; color: var(--color-text); } /* Light text */
+
+.experience-item, .education-item { margin-bottom: 1.5rem; }
+.experience-item h4, .education-item h4 {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--color-text); /* Light text */
+    margin-bottom: 0.25rem;
+}
+.experience-item ul { list-style-type: disc; margin-left: 1.2rem; margin-bottom: 0; color: var(--color-text); } /* Light list text */
+.education-item p {
+    font-size: 0.95rem;
+    color: var(--color-footer-text); /* Use lighter gray text */
+    margin-bottom: 0;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1rem; /* Equivalent to gap-4 for vertical spacing */
+}
+
+/* --- Card Style (If used) --- */
+/* --- Card Grid Layout (Ensure this exists) --- */
+/* You might have used .project-grid or similar */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* This ensures 3 equal columns */
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+#publications .subsection h3 {
+    font-size: 1.9rem; /* Current default is 1.6rem, adjust as you like */
+    font-weight: 700;  /* Standard bold is 700, current default is 600 */
+    color: var(--color-text); /* Ensures it uses the main light text color for better visibility if needed */
+    margin-bottom: 1.2rem; /* Optional: slightly increase bottom margin for the larger heading */
+}
+
+#publications .section p {
+    font-size: 1.2rem; /* Current default is 1.6rem, adjust as you like */
+}
+
+#about-me h2 {
+    font-size: 1.5rem; /* Increased from the default 2.2rem, adjust as you like */
+    margin-bottom: 0.5rem;
+    /* You can also adjust other properties like margin-bottom if needed */
+    /* margin-bottom: 1.8rem; */
+    color: var(--color-text)
+}
+
+#about-me .subsection h3 {
+    color: var(--color-text)
+}
+
+/* For the main "Resume" H2 heading */
+#resume h2 {
+    font-size: 2.2rem;
+    font-weight: 700; 
+    color: var(--color-text);
+     /* Increased from the default 2.2rem. Adjust as desired. */
+    /* You can also adjust margin-bottom if needed: */
+    /* margin-bottom: 1.8rem; */
+}
+
+/* For "Skills", "Experience", "Education" H3 headings */
+#resume .subsection h3 {
+    font-size: 1.5rem;   /* Increased from the default 1.6rem. Matches publication H3s. */
+    font-weight: 300; 
+    margin-bottom: 0.5rem;
+    color: var(--color-text)
+}
+
+#contact h2 {
+    font-size: 2.5rem; /* Matches other updated H2 headings. Adjust as desired. */
+    /* You can also adjust margin-bottom if needed: */
+    margin-bottom: 1.8rem; 
+}
+
+#contact p {
+    font-size: 1.3rem; /* Matches other updated H2 headings. Adjust as desired. */
+    /* You can also adjust margin-bottom if needed: */
+    margin-bottom: 1.2rem;
+}
+
+
+/* --- Card Style (Ensure this exists - Dark Theme version) --- */
+.card {
+    /* Use the lighter off-white for the card background */
+    background-color: var(--color-card-bg);
+    /* Remove the dark border or set to none */
+    border: 1rem;
+    /* Alternatively, use a very subtle light border: border: 1px solid #D8DAD5; */
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Changed transition */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    /* Set default text color inside the card to dark */
+    color: #153243; /* Darkest Blue for main text */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Add a subtle shadow on hover for depth, since border is removed */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Styles for Content INSIDE Publication Cards --- */
+.card h4 { /* Title */
+    /* Use the secondary dark blue for the title */
+    color: #284B63;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.card p { /* General paragraphs within the card */
+    /* Ensure general text uses the card's default dark color */
+    color: #153243;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.card p.authors,
+.card p.publication-details {
+    /* Use the secondary dark blue for less emphasis */
+    color: #284B63;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem; /* Consistent spacing */
+}
+
+.card p.publication-details {
+    margin-bottom: 1rem;
+}
+.card p.publication-details em {
+    font-style: italic; /* Keep italics for journal/conference */
+}
+
+.card .card-links {
+    margin-top: auto; /* Push links to the bottom */
+    padding-top: 1rem; /* Add space above links */
+    /* Use a light gray separator line */
+    border-top: 1px solid #CFDBD5; /* Light Gray separator */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card .card-links a.card-link {
+    /* Keep using the primary accent for links */
+    color: var(--color-primary-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    margin: 0;
+}
+.card .card-links a.card-link:hover {
+    /* Use the darker accent for hover */
+    color: var(--color-primary-accent-darker);
+    text-decoration: none;
+}
+
+/* --- Specific Styling for Resume Download Button --- */
+#resume-download-btn {
+    background-color: var(--color-primary-accent);          /* Set background to white */
+    color: var(--color-white);               /* Use darkest background blue for text contrast */
+    border-color: var(--color-primary-accent);    /* Use accent color for border */
+}
+
+#resume-download-btn:hover {
+    background-color: var(--color-primary-accent-darker);                     /* Slightly off-white background on hover */
+    color: var(--color-white);               /* Keep text color */
+    border-color: var(--color-primary-accent-darker); /* Darken border slightly on hover */
+    transform: translateY(-2px);                   /* Keep hover effect */
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--color-footer-bg); /* Use dark theme variable */
+    color: var(--color-footer-text); /* Use dark theme variable */
+    padding: 0.5rem 0; /* Keep user's specified reduced padding */
+    font-size: 0.9rem;
+    margin-top: auto;
+    border-top: 1px solid var(--color-border); /* Add border */
+}
+.footer-content {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; width: 100%;
+}
+.footer-left { text-align: left; }
+.footer-left p { margin-bottom: 0; }
+.footer-right.social-links { text-align: right; }
+.footer-right.social-links a {
+    color: var(--color-footer-text); /* Use dark theme variable */
+    font-size: 1.3rem; margin-left: 1rem; transition: color 0.3s ease;
+}
+.footer-right.social-links a:last-child { margin-right: 0; }
+.footer-right.social-links a:hover { color: var(--color-primary-accent); }
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    h1 { font-size: 2.5rem; } h2 { font-size: 2rem; } .section-hero h1 { font-size: 3rem; }
+}
+@media (max-width: 768px) {
+    html { font-size: 15px; }
+    :root { --header-height: 60px; }
+    body { padding-top: var(--header-height); }
+    .section { padding: 3rem 0; }
+    .nav-toggle { display: block; }
+    .main-nav {
+        position: absolute; top: var(--header-height); left: 0; width: 100%;
+        background-color: var(--color-background-alt); /* Dark Theme: Use alt dark bg for mobile menu */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow might be less visible, but okay */
+        max-height: 0; overflow: hidden; visibility: hidden; opacity: 0;
+        transition: max-height 0.4s ease-out, opacity 0.3s ease-out, visibility 0.4s ease-out;
+    }
+    .main-nav.nav-open { max-height: 500px; visibility: visible; opacity: 1; }
+    .main-nav .nav-list { flex-direction: column; align-items: stretch; padding: 1rem 0; }
+    .main-nav .nav-link { display: block; text-align: center; padding: 0.8rem 1rem; margin: 0.2rem 1rem; color: var(--color-text); } /* Ensure light text */
+    .main-nav .nav-link::after { /* Adjust underline position/appearance for mobile if needed */
+         left: 1rem; right: 1rem; bottom: 0.3rem;
+     }
+    .main-nav .nav-link:hover { color: var(--color-primary-accent); background-color: rgba(255, 255, 255, 0.05); /* Subtle light background on hover */ }
+     .main-nav .nav-link.active { color: var(--color-primary-accent); font-weight: 700; }
+
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-left { order: 2; }
+    .footer-right { order: 1; margin-bottom: 0.5rem; }
+    .footer-right.social-links a { margin: 0 0.75rem; }
+    .section-header-split { flex-direction: column; align-items: flex-start; }
+    .section-header-split .btn { align-self: flex-start; }
+    .profile-photo { float: none; display: block; margin: 0 auto 1.5rem auto; }
+}
