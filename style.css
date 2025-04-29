@@ -462,14 +462,15 @@ em { font-style: italic; }
 }
 
 #publications .subsection h3 {
-    font-size: 1.9rem; /* Current default is 1.6rem, adjust as you like */
-    font-weight: 700;  /* Standard bold is 700, current default is 600 */
+    font-size: 1.5rem; /* Current default is 1.6rem, adjust as you like */
+    font-weight: 600;  /* Standard bold is 700, current default is 600 */
     color: var(--color-text); /* Ensures it uses the main light text color for better visibility if needed */
-    margin-bottom: 1.2rem; /* Optional: slightly increase bottom margin for the larger heading */
+    margin-bottom: 0.7rem; /* Optional: slightly increase bottom margin for the larger heading */
 }
 
-#publications .section p {
+#publications .section h2 {
     font-size: 1.2rem; /* Current default is 1.6rem, adjust as you like */
+    margin-bottom: 1.5rem;
 }
 
 #about-me h2 {
@@ -528,8 +529,8 @@ em { font-style: italic; }
     color: #153243;
 
     /* New/Modified styles for fixed size and horizontal scrolling behavior */
-    width: 500px; /* Example: Card width is 75% of the viewport width. Adjust as needed. */
-    height: 300px; /* Example: Fixed height for cards. Adjust as needed (e.g., 45vh). */
+    width: 400px; /* Example: Card width is 75% of the viewport width. Adjust as needed. */
+    height: 200px; /* Example: Fixed height for cards. Adjust as needed (e.g., 45vh). */
     flex-shrink: 0; /* Prevent cards from shrinking */
 }
 
@@ -543,26 +544,27 @@ em { font-style: italic; }
 .card h4 { /* Title */
     color: #284B63;
     margin-bottom: 0.75rem;
-    font-size: 1.15rem;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    line-height: 1;
+    font-weight: 500;
 }
 
 .card p { /* General paragraphs within the card */
     color: #153243;
-    font-size: 0.95rem;
+    font-size: 0.6rem;
     margin-bottom: 0.5rem;
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 .card p.authors,
 .card p.publication-details {
     color: #284B63;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 0.5rem; /* Consistent spacing */
 }
 
 .card p.publication-details {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 .card p.publication-details em {
     font-style: italic; /* Keep italics for journal/conference */
@@ -580,7 +582,7 @@ em { font-style: italic; }
     color: var(--color-primary-accent);
     font-weight: 600;
     text-decoration: underline;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin: 0;
 }
 .card .card-links a.card-link:hover {
