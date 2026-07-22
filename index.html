@@ -189,55 +189,49 @@
     color:var(--ink-faint); margin:0 0 16px; padding-bottom:10px; border-bottom:1px solid var(--line);
   }
   .mini-label.spaced{margin-top:44px;}
-  .paper{
-    display:grid; grid-template-columns:56px 1fr; gap:20px; padding:26px;
-    border:1px solid var(--line); background:var(--bg-deep); margin-bottom:16px;
-    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+
+  .validate-terminal{
+    border:1px solid var(--line); background:var(--bg-deep);
+    padding:30px 32px; font-family:var(--mono); font-size:13.5px; line-height:1.7;
+    overflow-x:auto;
   }
-  .paper:last-of-type{margin-bottom:0;}
-  .paper:hover{
-    border-color:var(--amber-dim); transform:translateY(-3px);
-    box-shadow:0 10px 28px rgba(0,0,0,0.28);
+  .validate-cmd{color:var(--green); margin-bottom:8px; white-space:nowrap;}
+  .validate-cmd .prompt{color:var(--ink-faint); margin-right:10px;}
+  .validate-divider{color:var(--ink-faint); margin:26px 0 20px; white-space:nowrap;}
+
+  .vtest{padding:20px 0; border-top:1px dashed var(--line);}
+  .vtest.first{border-top:none; padding-top:6px;}
+
+  .vtest-head{display:flex; align-items:baseline; flex-wrap:wrap; gap:12px 16px;}
+  .vtest-status{
+    font-weight:700; font-size:11.5px; letter-spacing:0.06em; padding:2px 8px; border:1px solid; flex-shrink:0;
   }
-  @media (prefers-reduced-motion: reduce){ .paper:hover{transform:none;} }
-  .paper .pub-index{
-    font-family:var(--mono); color:var(--green); font-size:13px; padding-top:4px; white-space:nowrap;
+  .vtest-status.pass{color:var(--green); border-color:var(--green);}
+  .vtest-status.filed{color:var(--amber); border-color:var(--amber);}
+  .vtest-path{color:var(--ink-faint); word-break:break-word;}
+  .vtest-meta{color:var(--ink-faint); font-size:12px; margin-left:auto; white-space:nowrap;}
+
+  .vtest-title{
+    font-family:var(--sans); font-weight:600; font-size:17.5px; color:var(--ink);
+    margin:12px 0 8px; line-height:1.4;
   }
-  .paper .pub-index::before{content:"[";}
-  .paper .pub-index::after{content:"]";}
-  .pub-top{display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;}
-  .pub-badge{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:0.05em; text-transform:uppercase;
-    color:var(--amber); border:1px solid var(--amber-dim); padding:4px 10px;
+  .vtest-assert{color:var(--ink-dim); font-size:14px; line-height:1.6; margin:0 0 10px; padding-left:22px; position:relative; max-width:64ch;}
+  .vtest-assert::before{content:"\2713"; position:absolute; left:0; color:var(--green);}
+  .vtest-authors{color:var(--ink-faint); font-size:12px; margin:0 0 12px; padding-left:22px;}
+  .vtest-authors::before{content:"// ";}
+  .vtest-links{display:flex; flex-wrap:wrap; gap:20px; padding-left:22px;}
+  .vtest-links a{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); text-decoration:none;
+    border-bottom:1px dashed var(--ink-faint); transition:color .2s ease, border-color .2s ease;
   }
-  .paper h3{font-family:var(--sans); font-weight:600; font-size:19px; line-height:1.4; margin-bottom:10px;}
-  .paper .pub-note{color:var(--ink-dim); font-size:14.5px; line-height:1.6; margin-bottom:14px; max-width:62ch;}
-  .paper .byline{color:var(--green); font-family:var(--mono); font-size:12px; margin-bottom:16px;}
-  .paper .links{display:flex; flex-wrap:wrap; gap:10px;}
-  .paper .links a{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:0.03em; text-transform:uppercase;
-    text-decoration:none; color:var(--ink-dim); border:1px solid var(--line); padding:7px 12px;
-    transition:color .2s ease, border-color .2s ease;
+  .vtest-links a::before{content:"\2192 "; color:var(--ink-faint);}
+  .vtest-links a:hover{color:var(--amber); border-color:var(--amber);}
+
+  .validate-summary{
+    margin-top:22px; padding-top:20px; border-top:1px solid var(--line);
+    color:var(--ink-faint); font-size:12.5px; display:flex; flex-wrap:wrap; gap:6px 24px;
   }
-  .paper .links a:hover{color:var(--amber); border-color:var(--amber-dim);}
-  .patent-box{
-    padding:26px; border:1px solid var(--line); background:var(--bg-deep);
-    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
-  }
-  .patent-box:hover{
-    border-color:var(--amber-dim); transform:translateY(-3px);
-    box-shadow:0 10px 28px rgba(0,0,0,0.28);
-  }
-  @media (prefers-reduced-motion: reduce){ .patent-box:hover{transform:none;} }
-  .patent-box .k{font-family:var(--mono); font-size:11.5px; color:var(--amber); letter-spacing:0.1em; text-transform:uppercase;}
-  .patent-box .k::before{content:"[";}
-  .patent-box .k::after{content:"]";}
-  .patent-box h4{font-family:var(--sans); font-weight:600; font-size:17px; margin:12px 0 10px;}
-  .patent-box .pub-note{color:var(--ink-dim); font-size:14.5px; line-height:1.6; margin:0 0 14px; max-width:62ch;}
-  .patent-box .num{
-    display:inline-block; font-family:var(--mono); font-size:12px; color:var(--ink-dim);
-    border:1px solid var(--line); padding:6px 12px;
-  }
+  .validate-summary strong{color:var(--ink);}
 
   /* ---------- STACK & RESUME ---------- */
   #stack{background-color:var(--bg);}
@@ -319,7 +313,8 @@
     .layer{grid-template-columns:1fr;}
     .layer .ltag{border-right:none; border-bottom:1px solid var(--line); flex-direction:row; justify-content:space-between;}
     section{padding:76px 0; scroll-margin-top:150px;}
-    .paper{grid-template-columns:40px 1fr;}
+    .validate-terminal{padding:22px 18px; font-size:12.5px;}
+    .vtest-meta{margin-left:0;}
     .topbar-nav{gap:14px 18px;}
     .topbar-nav a{font-size:11.5px;}
     .photo-grid{grid-template-columns:repeat(2, 1fr); grid-auto-rows:150px;}
@@ -486,60 +481,73 @@
     <div class="wrap">
       <div class="eyebrow"><span class="idx">03 / VALIDATE</span><span class="tag">—</span><span>Research</span></div>
       <div class="section-head">
-        <h2>Papers and a patent.</h2>
+        <h2>Independently verified, three times over.</h2>
       </div>
 
-      <div class="mini-label">Papers</div>
+      <div class="validate-terminal">
+        <div class="validate-cmd"><span class="prompt">$</span>validate --suite=research/*</div>
 
-      <div class="paper">
-        <div class="pub-index">01</div>
-        <div>
-          <div class="pub-top"><span class="pub-badge">ISEC &middot; 2025</span></div>
-          <h3>Dominant Hand Detection Using Base Smartphone Sensors</h3>
-          <p class="pub-note">Identifies which hand is holding a phone using only its built-in accelerometer and gyroscope — no camera or calibration step required.</p>
-          <div class="byline">Tuneer Khargonkar, Prasoon Singh, Shilpa Singh, Sumit Kumar</div>
-          <div class="links">
+        <div class="vtest first">
+          <div class="vtest-head">
+            <span class="vtest-status pass">PASS</span>
+            <span class="vtest-path">research/dominant-hand-detection.spec</span>
+            <span class="vtest-meta">ISEC &middot; 2025</span>
+          </div>
+          <h3 class="vtest-title">Dominant Hand Detection Using Base Smartphone Sensors</h3>
+          <p class="vtest-assert">Identifies which hand is holding a phone using only its built-in accelerometer and gyroscope — no camera or calibration step required.</p>
+          <p class="vtest-authors">Tuneer Khargonkar, Prasoon Singh, Shilpa Singh, Sumit Kumar</p>
+          <div class="vtest-links">
             <a href="https://dl.acm.org/doi/10.1145/3717383.3717393" target="_blank" rel="noopener">View abstract</a>
             <a href="https://dl.acm.org/doi/pdf/10.1145/3717383.3717393" target="_blank" rel="noopener">Download PDF</a>
           </div>
         </div>
-      </div>
 
-      <div class="paper">
-        <div class="pub-index">02</div>
-        <div>
-          <div class="pub-top"><span class="pub-badge">ISCAS &middot; 2023</span></div>
-          <h3>SeLiNet: Sentiment-Enriched Lightweight Network for Emotion Recognition in Images</h3>
-          <p class="pub-note">A lightweight neural network that reads emotional sentiment from images, built to run efficiently on resource-constrained hardware.</p>
-          <div class="byline">Tuneer Khargonkar, Shwetank Choudhary, Sumit Kumar</div>
-          <div class="links">
+        <div class="vtest">
+          <div class="vtest-head">
+            <span class="vtest-status pass">PASS</span>
+            <span class="vtest-path">research/selinet-emotion-recognition.spec</span>
+            <span class="vtest-meta">ISCAS &middot; 2023</span>
+          </div>
+          <h3 class="vtest-title">SeLiNet: Sentiment-Enriched Lightweight Network for Emotion Recognition in Images</h3>
+          <p class="vtest-assert">A lightweight neural network that reads emotional sentiment from images, built to run efficiently on resource-constrained hardware.</p>
+          <p class="vtest-authors">Tuneer Khargonkar, Shwetank Choudhary, Sumit Kumar</p>
+          <div class="vtest-links">
             <a href="https://arxiv.org/abs/2307.02773" target="_blank" rel="noopener">View on arXiv</a>
             <a href="https://arxiv.org/pdf/2307.02773" target="_blank" rel="noopener">Download PDF</a>
           </div>
         </div>
-      </div>
 
-      <div class="paper">
-        <div class="pub-index">03</div>
-        <div>
-          <div class="pub-top"><span class="pub-badge">MDPI &middot; 2022</span></div>
-          <h3>Automatic Rice Disease Detection and Assistance Framework Using Deep Learning and a Chatbot</h3>
-          <p class="pub-note">Pairs a deep learning classifier with a conversational chatbot to help farmers identify rice crop diseases and get treatment guidance.</p>
-          <div class="byline">Tuneer Khargonkar, Siddhi Jain, Rahul Sahni</div>
-          <div class="links">
+        <div class="vtest">
+          <div class="vtest-head">
+            <span class="vtest-status pass">PASS</span>
+            <span class="vtest-path">research/rice-disease-detection.spec</span>
+            <span class="vtest-meta">MDPI &middot; 2022</span>
+          </div>
+          <h3 class="vtest-title">Automatic Rice Disease Detection and Assistance Framework Using Deep Learning and a Chatbot</h3>
+          <p class="vtest-assert">Pairs a deep learning classifier with a conversational chatbot to help farmers identify rice crop diseases and get treatment guidance.</p>
+          <p class="vtest-authors">Tuneer Khargonkar, Siddhi Jain, Rahul Sahni</p>
+          <div class="vtest-links">
             <a href="https://www.mdpi.com/2079-9292/11/14/2110" target="_blank" rel="noopener">View paper</a>
             <a href="https://www.mdpi.com/2079-9292/11/14/2110/pdf?version=1657088777" target="_blank" rel="noopener">Download PDF</a>
           </div>
         </div>
-      </div>
 
-      <div class="mini-label spaced">Patents</div>
+        <div class="validate-divider">// patents</div>
 
-      <div class="patent-box">
-        <span class="k">Patent</span>
-        <h4>Method and system for virtually monitoring the mood of an infant in an anti-infection cradle and automatically performing remedial actions</h4>
-        <p class="pub-note">A system for remotely monitoring an infant's mood inside an enclosed cradle and automatically triggering corrective actions.</p>
-        <span class="num">Patent No. IN 202111011104</span>
+        <div class="vtest">
+          <div class="vtest-head">
+            <span class="vtest-status filed">FILED</span>
+            <span class="vtest-path">patents/infant-cradle-monitoring</span>
+            <span class="vtest-meta">IN 202111011104</span>
+          </div>
+          <h3 class="vtest-title">Method and system for virtually monitoring the mood of an infant in an anti-infection cradle and automatically performing remedial actions</h3>
+          <p class="vtest-assert">A system for remotely monitoring an infant's mood inside an enclosed cradle and automatically triggering corrective actions.</p>
+        </div>
+
+        <div class="validate-summary">
+          <span>Test Suites: <strong>3 passed</strong>, 3 total</span>
+          <span>Patents: <strong>1 filed</strong>, 1 total</span>
+        </div>
       </div>
     </div>
   </section>
