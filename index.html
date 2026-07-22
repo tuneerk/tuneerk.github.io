@@ -102,14 +102,16 @@
   .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
 
   .scroll-cue{
-    position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:900;
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--ink-faint); opacity:1; transition:opacity .3s ease; pointer-events:none;
+    position:fixed; left:50%; bottom:28px; transform:translateX(-50%); z-index:900;
+    display:flex; align-items:center; gap:12px;
+    padding:12px 20px; border:1px solid var(--amber-dim); background:rgba(10,26,43,0.9);
+    font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink); opacity:1; transition:opacity .3s ease; pointer-events:none;
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
   }
   .scroll-cue.hidden{opacity:0;}
-  .scroll-cue-arrow{font-size:15px; animation:scrollBounce 1.6s ease-in-out infinite;}
-  @keyframes scrollBounce{ 0%,100%{transform:translateY(0); opacity:.5;} 50%{transform:translateY(6px); opacity:1;} }
+  .scroll-cue-arrow{color:var(--amber); font-size:20px; font-weight:700; animation:scrollBounce 1.4s ease-in-out infinite;}
+  @keyframes scrollBounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(7px);} }
   .btn{
     font-family:var(--mono); font-size:13px; letter-spacing:0.04em; text-transform:none;
     text-decoration:none; padding:13px 20px; border:1px solid var(--line);
@@ -131,13 +133,7 @@
   .pipe-node.active text{fill:var(--ink);}
 
   /* ---------- SECTIONS ---------- */
-  section{
-    padding:110px 0; scroll-margin-top:130px;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size:34px 34px;
-  }
+  section{padding:110px 0; scroll-margin-top:130px;}
   .section-head{margin-bottom:52px; max-width:640px;}
   .section-head h2{font-size:clamp(24px,3.4vw,36px); margin-top:14px; line-height:1.25;}
   .section-head p.sub{color:var(--ink-dim); margin-top:14px; font-family:var(--sans); font-size:15.5px;}
