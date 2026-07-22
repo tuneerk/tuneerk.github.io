@@ -22,6 +22,8 @@
     --amber:#e8a33d;
     --amber-dim:#a97627;
     --green:#7fbf9e;
+    --google:#8ab4f8;
+    --samsung:#c58af9;
     --radius:1px;
     --maxw:1180px;
     --mono:'JetBrains Mono', monospace;
@@ -55,6 +57,9 @@
   .eyebrow .idx{color:var(--ink-faint);}
   .eyebrow .tag{color:var(--ink-dim);}
 
+  .co-google{color:var(--google);}
+  .co-samsung{color:var(--samsung);}
+
   /* corner registration marks, like a technical drawing sheet */
   .sheet{position:relative;}
   .sheet::before, .sheet::after,
@@ -63,55 +68,32 @@
   /* ---------- TOPBAR ---------- */
   .topbar{
     position:fixed; top:0; left:0; right:0; z-index:1000;
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    gap:10px 24px;
     padding:16px 28px;
-    background:linear-gradient(to bottom, rgba(15,35,56,0.94), rgba(15,35,56,0));
+    background:linear-gradient(to bottom, rgba(15,35,56,0.96) 70%, rgba(15,35,56,0));
   }
   .brand{
     display:flex; align-items:center; gap:10px; text-decoration:none;
-    font-family:var(--mono); font-size:14px; font-weight:600; color:var(--ink);
+    font-family:var(--mono); font-size:14px; font-weight:600; color:var(--ink); letter-spacing:0.02em;
   }
-  .brand .dot{width:8px;height:8px;background:var(--amber); border-radius:50%;}
-  .menu-btn{
-    background:none; border:1px solid var(--line); color:var(--ink);
-    font-family:var(--mono); font-size:12px; letter-spacing:0.08em;
-    padding:9px 16px; cursor:pointer; text-transform:uppercase;
-    display:flex; align-items:center; gap:10px;
-    transition:border-color .2s ease, color .2s ease;
+  .brand .dot{width:8px;height:8px;background:var(--amber); border-radius:50%; flex-shrink:0;}
+  .topbar-nav{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .topbar-nav a{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase;
+    text-decoration:none; color:var(--ink-dim); white-space:nowrap;
+    padding:4px 0 5px; border-bottom:2px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
   }
-  .menu-btn:hover{border-color:var(--amber); color:var(--amber);}
-  .menu-btn .bars{display:flex; flex-direction:column; gap:3px;}
-  .menu-btn .bars span{width:14px; height:1.5px; background:currentColor; display:block;}
-
-  /* ---------- NAV OVERLAY ---------- */
-  .nav-overlay{
-    position:fixed; inset:0; z-index:1500; background:var(--bg-deep);
-    display:flex; flex-direction:column;
-    transform:translateY(-100%); transition:transform .5s cubic-bezier(.7,0,.2,1);
-  }
-  .nav-overlay.open{transform:translateY(0);}
-  .nav-overlay-top{display:flex; justify-content:space-between; align-items:center; padding:16px 28px;}
-  .close-btn{
-    background:none;border:1px solid var(--line);color:var(--ink);
-    width:38px;height:38px; cursor:pointer; font-size:16px;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .close-btn:hover{border-color:var(--amber); color:var(--amber);}
-  .nav-list{flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 28px; max-width:var(--maxw); margin:0 auto; width:100%;}
-  .nav-list a{
-    display:flex; align-items:baseline; gap:20px; text-decoration:none; padding:14px 0;
-    border-bottom:1px solid var(--line); color:var(--ink-dim);
-  }
-  .nav-list a:first-child{border-top:1px solid var(--line);}
-  .nav-list a:hover, .nav-list a.active{color:var(--ink);}
-  .nav-list a:hover .nav-num, .nav-list a.active .nav-num{color:var(--amber);}
-  .nav-num{font-family:var(--mono); font-size:13px; color:var(--ink-faint); width:26px;}
-  .nav-label{font-family:var(--mono); font-size:clamp(20px,4vw,32px); font-weight:700; flex:1;}
-  .nav-stage{font-family:var(--mono); font-size:12px; color:var(--ink-faint); letter-spacing:0.08em;}
+  .topbar-nav a:hover, .topbar-nav a.active{color:var(--ink); border-bottom-color:var(--amber);}
 
   /* ---------- HERO ---------- */
   .hero{min-height:100svh; display:flex; align-items:center; padding:120px 0 60px;}
   .hero .wrap{display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;}
+  .hero-name{
+    font-family:var(--mono); font-size:14px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:16px;
+  }
   .hero-eyebrow{margin-bottom:20px; color:var(--ink-dim);}
   .hero h1{font-size:clamp(30px,4.6vw,50px); line-height:1.18;}
   .hero h1 .hl{color:var(--amber);}
@@ -138,7 +120,7 @@
   .pipe-node.active text{fill:var(--ink);}
 
   /* ---------- SECTIONS ---------- */
-  section{padding:110px 0;}
+  section{padding:110px 0; scroll-margin-top:130px;}
   .section-head{margin-bottom:52px; max-width:640px;}
   .section-head h2{font-size:clamp(24px,3.4vw,36px); margin-top:14px; line-height:1.25;}
   .section-head p.sub{color:var(--ink-dim); margin-top:14px; font-family:var(--sans); font-size:15.5px;}
@@ -173,18 +155,34 @@
   .log-entry.major::before{border-color:var(--amber); background:var(--amber);}
   .log-line{display:flex; gap:14px; flex-wrap:wrap; align-items:baseline; font-family:var(--mono); font-size:14px;}
   .log-hash{color:var(--ink-faint);}
-  .log-date{color:var(--ink-faint); font-size:12.5px;}
+  .log-date{color:var(--green); font-size:12.5px; font-family:var(--mono);}
+  .log-date::before{content:"[";}
+  .log-date::after{content:"]";}
   .log-msg{color:var(--ink); font-weight:600;}
   .log-entry.major .log-msg{color:var(--amber); font-size:16px;}
-  .log-body{margin:14px 0 0; padding-left:0; list-style:none;}
-  .log-body li{color:var(--ink-dim); font-size:14.5px; padding-left:22px; position:relative; margin-bottom:9px;}
+  .log-body{
+    margin:16px 0 0; padding:16px 20px; list-style:none;
+    border:1px solid var(--line); background:var(--bg-deep);
+  }
+  .log-body li{
+    color:var(--ink-dim); font-family:var(--mono); font-size:13px;
+    padding-left:22px; position:relative; margin-bottom:10px;
+  }
   .log-body li::before{content:"+"; position:absolute; left:0; color:var(--green); font-family:var(--mono);}
   .log-body li:last-child{margin-bottom:0;}
 
   /* ---------- RESEARCH ---------- */
   #research{background:var(--panel);}
-  .paper{display:grid; grid-template-columns:64px 1fr; gap:22px; padding:28px 0; border-top:1px solid var(--line);}
-  .paper:last-of-type{border-bottom:1px solid var(--line);}
+  .mini-label{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-faint); margin:0 0 16px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .mini-label.spaced{margin-top:44px;}
+  .paper{
+    display:grid; grid-template-columns:64px 1fr; gap:22px; padding:26px;
+    border:1px solid var(--line); background:var(--bg-deep); margin-bottom:16px;
+  }
+  .paper:last-of-type{margin-bottom:0;}
   .paper .tagno{font-family:var(--mono); color:var(--ink-faint); font-size:12.5px; padding-top:4px;}
   .paper h3{font-family:var(--sans); font-weight:600; font-size:19px; line-height:1.4; margin-bottom:8px;}
   .paper .byline{color:var(--green); font-family:var(--mono); font-size:12.5px; margin-bottom:4px;}
@@ -193,7 +191,7 @@
     font-family:var(--mono); font-size:12px; letter-spacing:0.02em; text-decoration:none; color:var(--ink);
     border-bottom:1px solid var(--amber); margin-right:22px; padding-bottom:2px;
   }
-  .patent-box{margin-top:46px; padding:22px; border:1px solid var(--line); background:var(--bg-deep);}
+  .patent-box{padding:26px; border:1px solid var(--line); background:var(--bg-deep);}
   .patent-box .k{font-family:var(--mono); font-size:11.5px; color:var(--amber); letter-spacing:0.1em; text-transform:uppercase;}
   .patent-box h4{font-family:var(--sans); font-weight:600; font-size:17px; margin:10px 0 6px;}
   .patent-box .num{color:var(--ink-dim); font-family:var(--mono); font-size:12.5px;}
@@ -205,27 +203,44 @@
   .layer{display:grid; grid-template-columns:120px 1fr; border-top:1px solid var(--line);}
   .layer:first-child{border-top:none;}
   .layer .ltag{
-    font-family:var(--mono); font-size:12px; color:var(--ink-faint); padding:18px 16px;
-    border-right:1px solid var(--line); display:flex; flex-direction:column; justify-content:center; gap:3px;
+    font-family:var(--mono); font-size:13px; color:var(--amber); letter-spacing:0.06em; padding:18px 16px;
+    border-right:1px solid var(--line); display:flex; align-items:center;
   }
-  .layer .ltag b{color:var(--amber); font-size:13px;}
   .layer .chips{display:flex; flex-wrap:wrap; gap:8px; padding:16px 20px; align-content:center;}
   .chip{font-family:var(--mono); font-size:12.5px; border:1px solid var(--line); padding:6px 12px; color:var(--ink-dim); background:var(--panel);}
-  .cert-row{display:flex; align-items:center; gap:14px; margin-top:24px; flex-wrap:wrap;}
-  .cert-row .chip{border-color:var(--amber-dim); color:var(--amber);}
-  .build-tag{font-family:var(--mono); font-size:12px; color:var(--ink-faint); margin-top:36px;}
+  .cert-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .cert-row .chip{border-color:var(--amber-dim); color:var(--amber); font-size:13px; padding:8px 14px;}
+  .edu-block{border:1px solid var(--line); background:var(--bg-deep); padding:20px 22px;}
+  .edu-block h4{font-family:var(--sans); font-weight:600; font-size:15.5px; margin-bottom:8px; color:var(--ink);}
+  .edu-block p{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); margin:0 0 6px;}
+  .edu-block p:last-child{margin-bottom:0; color:var(--ink-faint);}
 
   /* ---------- PHOTOGRAPHY (IDLE) ---------- */
   #photography{background:var(--panel);}
   #photography .section-head{margin-bottom:32px;}
-  .idle-strip{display:flex; gap:12px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x proximity;}
-  .idle-strip::-webkit-scrollbar{height:6px;}
-  .idle-strip::-webkit-scrollbar-thumb{background:var(--bg-deep);}
-  .idle-shot{
-    scroll-snap-align:start; flex:0 0 150px; cursor:pointer; border:1px solid var(--line); background:var(--bg-deep);
+  .photo-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:180px; grid-auto-flow:dense; gap:12px;
   }
-  .idle-shot img{width:150px; height:150px; object-fit:cover; filter:saturate(0.9) contrast(1.02);}
-  .idle-shot .cap{font-family:var(--mono); font-size:10px; color:var(--ink-faint); padding:7px 8px;}
+  .photo-tile{
+    position:relative; margin:0; overflow:hidden; cursor:pointer;
+    border:1px solid var(--line); background:var(--bg-deep);
+  }
+  .photo-tile img{
+    width:100%; height:100%; object-fit:cover; filter:saturate(0.9) contrast(1.02);
+    transition:transform .4s ease;
+  }
+  .photo-tile:hover img{transform:scale(1.04);}
+  @media (prefers-reduced-motion: reduce){ .photo-tile:hover img{transform:none;} }
+  .photo-tile.wide{grid-column:span 2;}
+  .photo-tile.tall{grid-row:span 2;}
+  .photo-tile figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:8px 10px;
+    background:linear-gradient(0deg, rgba(10,26,43,0.92) 0%, rgba(10,26,43,0) 100%);
+    color:var(--ink); font-family:var(--mono); font-size:11px; letter-spacing:0.02em;
+    opacity:0; transform:translateY(6px); transition:opacity .25s ease, transform .25s ease;
+  }
+  .photo-tile:hover figcaption, .photo-tile:focus-within figcaption{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .photo-tile figcaption{transition:none;} }
 
   .lightbox{position:fixed; inset:0; background:rgba(6,14,22,0.95); z-index:2000; display:none; align-items:center; justify-content:center; padding:40px 20px;}
   .lightbox.open{display:flex;}
@@ -240,8 +255,9 @@
   #contact p{color:var(--ink-dim); max-width:44ch; margin:0 auto 34px; font-family:var(--sans);}
   .contact-cta{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:70px;}
   footer{border-top:1px solid var(--line); padding:24px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-family:var(--mono); font-size:12px; color:var(--ink-faint);}
-  footer a{text-decoration:none; margin-left:18px;}
+  footer a{text-decoration:none; margin-left:18px; display:inline-flex; align-items:center; gap:6px;}
   footer a:hover{color:var(--amber);}
+  .icon{flex-shrink:0;}
 
   ::selection{background:var(--amber); color:#1c1305;}
 
@@ -259,12 +275,15 @@
     .about-grid{grid-template-columns:1fr; gap:32px;}
     .layer{grid-template-columns:1fr;}
     .layer .ltag{border-right:none; border-bottom:1px solid var(--line); flex-direction:row; justify-content:space-between;}
-    section{padding:76px 0;}
+    section{padding:76px 0; scroll-margin-top:150px;}
     .paper{grid-template-columns:40px 1fr;}
+    .topbar-nav{gap:14px 18px;}
+    .topbar-nav a{font-size:11.5px;}
+    .photo-grid{grid-template-columns:repeat(2, 1fr); grid-auto-rows:150px;}
   }
-  @media (max-width:520px){
-    .nav-label{font-size:20px;}
-    .idle-shot, .idle-shot img{flex-basis:120px; width:120px; height:120px;}
+  @media (max-width:640px){
+    .topbar{flex-direction:column; align-items:flex-start; padding:14px 20px;}
+    .topbar-nav{gap:10px 16px;}
   }
 </style>
 </head>
@@ -280,28 +299,17 @@
   </figure>
 </div>
 
-<div class="nav-overlay" id="navOverlay">
-  <div class="nav-overlay-top">
-    <span class="brand"><span class="dot"></span>TUNEER KHARGONKAR</span>
-    <button class="close-btn" id="navClose" aria-label="Close menu">✕</button>
-  </div>
-  <nav class="nav-list" id="navList">
-    <a href="#home" data-target="home"><span class="nav-num">00</span><span class="nav-label">Home</span><span class="nav-stage">[BOOT]</span></a>
-    <a href="#about" data-target="about"><span class="nav-num">01</span><span class="nav-label">About</span><span class="nav-stage">[INGEST]</span></a>
-    <a href="#log" data-target="log"><span class="nav-num">02</span><span class="nav-label">Career Log</span><span class="nav-stage">[TRAIN]</span></a>
-    <a href="#research" data-target="research"><span class="nav-num">03</span><span class="nav-label">Research</span><span class="nav-stage">[VALIDATE]</span></a>
-    <a href="#stack" data-target="stack"><span class="nav-num">04</span><span class="nav-label">Stack &amp; Resume</span><span class="nav-stage">[SERVE]</span></a>
-    <a href="#photography" data-target="photography"><span class="nav-num">05</span><span class="nav-label">Photography</span><span class="nav-stage">[IDLE]</span></a>
-    <a href="#contact" data-target="contact"><span class="nav-num">06</span><span class="nav-label">Contact</span><span class="nav-stage">[SHIP]</span></a>
-  </nav>
-</div>
-
 <header class="topbar">
-  <a class="brand" href="#home"><span class="dot"></span>TK</a>
-  <button class="menu-btn" id="menuOpen">
-    <span class="bars"><span></span><span></span><span></span></span>
-    Menu
-  </button>
+  <a class="brand" href="#home"><span class="dot"></span>TUNEER KHARGONKAR</a>
+  <nav class="topbar-nav" id="topbarNav" aria-label="Primary">
+    <a href="#home" data-target="home">Home</a>
+    <a href="#about" data-target="about">About</a>
+    <a href="#log" data-target="log">Career Log</a>
+    <a href="#research" data-target="research">Research</a>
+    <a href="#stack" data-target="stack">Stack &amp; Resume</a>
+    <a href="#photography" data-target="photography">Photography</a>
+    <a href="#contact" data-target="contact">Contact</a>
+  </nav>
 </header>
 
 <main>
@@ -310,7 +318,8 @@
   <section id="home" class="hero">
     <div class="wrap">
       <div>
-        <div class="eyebrow hero-eyebrow">// ai engineer @ google · ex-samsung research</div>
+        <div class="hero-name">Tuneer Khargonkar</div>
+        <div class="eyebrow hero-eyebrow">// ai engineer @ <span class="co-google">google</span> · ex-<span class="co-samsung">samsung research</span></div>
         <h1>I build machine learning systems — and <span class="hl">ship</span> them to production.</h1>
         <p class="lede">Currently building end-to-end ML on GCP at Google. Before that, two and a half years on on-device AI at Samsung Research — model compression, edge deployment, and applied research published at ISCAS and ISEC. Photography is the background process that's been running since 2021.</p>
         <div class="cta-row">
@@ -319,14 +328,14 @@
         </div>
       </div>
       <div class="pipeline" aria-hidden="true">
-        <svg viewBox="0 0 340 160">
-          <path class="pipe-line" d="M20,80 H320"/>
-          <path class="pipe-flow" d="M20,80 H320"/>
+        <svg viewBox="0 0 372 160">
+          <path class="pipe-line" d="M4,80 H368"/>
+          <path class="pipe-flow" d="M4,80 H368"/>
           <g class="pipe-node active"><rect x="4" y="60" width="60" height="40"/><text x="34" y="84" text-anchor="middle">DATA</text></g>
           <g class="pipe-node"><rect x="80" y="60" width="60" height="40"/><text x="110" y="84" text-anchor="middle">TRAIN</text></g>
           <g class="pipe-node"><rect x="156" y="60" width="60" height="40"/><text x="186" y="84" text-anchor="middle">EVAL</text></g>
           <g class="pipe-node"><rect x="232" y="60" width="60" height="40"/><text x="262" y="84" text-anchor="middle">DEPLOY</text></g>
-          <g class="pipe-node"><rect x="298" y="60" width="38" height="40"/><text x="317" y="84" text-anchor="middle" style="font-size:9px;">PROD</text></g>
+          <g class="pipe-node"><rect x="308" y="60" width="60" height="40"/><text x="338" y="84" text-anchor="middle">PROD</text></g>
         </svg>
       </div>
     </div>
@@ -339,13 +348,13 @@
       <div class="about-grid" style="margin-top:36px;">
         <div>
           <h2 style="font-family:var(--sans); font-weight:600; font-size:26px; margin-bottom:20px;">Instrumentation → deep learning → production ML.</h2>
-          <p>I started in instrumentation and electronics at NIT Jalandhar, then moved into data science and deep learning — first on computer vision for agriculture, then at Samsung Research building on-device AI: emotion recognition, image effects, and sensor models that run entirely on a phone, not a server.</p>
-          <p>Now I'm an AI Engineer at Google, building end-to-end ML systems on GCP — forecasting frameworks powered by LLMs, retrieval-augmented chat, the kind of work that has to hold up in production, not just in a notebook. Photography stays in the loop too: I ran a university photography club, and I still shoot — mostly travel and street work — for the same reason I like ML: deciding what to keep in frame and what to leave out.</p>
+          <p>I started in instrumentation and electronics at NIT Jalandhar, then moved into data science and deep learning — first on computer vision for agriculture, then at <span class="co-samsung">Samsung Research</span> building on-device AI: emotion recognition, image effects, and sensor models that run entirely on a phone, not a server.</p>
+          <p>Now I'm an AI Engineer at <span class="co-google">Google</span>, building end-to-end ML systems on GCP — forecasting frameworks powered by LLMs, retrieval-augmented chat, the kind of work that has to hold up in production, not just in a notebook. Photography stays in the loop too: I ran a university photography club, and I still shoot — mostly travel and street work — for the same reason I like ML: deciding what to keep in frame and what to leave out.</p>
         </div>
         <div class="config">
           <div class="head">profile.yaml</div>
           <div class="body">
-            <div class="row"><span class="k">role</span><span class="colon">:</span><span class="v">AI Engineer, Google LLC</span></div>
+            <div class="row"><span class="k">role</span><span class="colon">:</span><span class="v">AI Engineer, <span class="co-google">Google LLC</span></span></div>
             <div class="row"><span class="k">location</span><span class="colon">:</span><span class="v">Bengaluru, India</span></div>
             <div class="row"><span class="k">focus</span><span class="colon">:</span><span class="v">on-device AI, applied ML, LLM systems</span></div>
             <div class="row"><span class="k">education</span><span class="colon">:</span><span class="v">B.Tech, NIT Jalandhar '22</span></div>
@@ -368,7 +377,7 @@
       <div class="log">
 
         <div class="log-entry major">
-          <div class="log-line"><span class="log-hash">9f0a41c</span><span class="log-date">Dec 2024 → present</span><span class="log-msg">AI Engineer, Google LLC — Bengaluru</span></div>
+          <div class="log-line"><span class="log-hash">9f0a41c</span><span class="log-date">Dec 2024 → present</span><span class="log-msg">AI Engineer, <span class="co-google">Google LLC</span> — Bengaluru</span></div>
           <ul class="log-body">
             <li>Built a trend analysis and forecasting framework powered by large language models.</li>
             <li>Shipped a question-and-answer chatbot using LLMs and retrieval-augmented generation (RAG).</li>
@@ -388,7 +397,7 @@
         </div>
 
         <div class="log-entry major">
-          <div class="log-line"><span class="log-hash">e02f6d1</span><span class="log-date">Jul 2022 → Dec 2024</span><span class="log-msg">Software Engineer, ML, Samsung Research — Bengaluru</span></div>
+          <div class="log-line"><span class="log-hash">e02f6d1</span><span class="log-date">Jul 2022 → Dec 2024</span><span class="log-msg">Software Engineer, ML, <span class="co-samsung">Samsung Research</span> — Bengaluru</span></div>
           <ul class="log-body">
             <li>Built an on-device 3D video-effects pipeline from a single input image — 80% user preference in test-group evaluation — using image segmentation and depth estimation.</li>
             <li>Developed a deep learning framework for emotion understanding from images, including data pre-processing and augmentation to improve data quality.</li>
@@ -403,7 +412,7 @@
         </div>
 
         <div class="log-entry">
-          <div class="log-line"><span class="log-hash">88d3e02</span><span class="log-date">2022</span><span class="log-msg">Intern, Samsung Electronics — deep learning &amp; Android</span></div>
+          <div class="log-line"><span class="log-hash">88d3e02</span><span class="log-date">2022</span><span class="log-msg">Intern, <span class="co-samsung">Samsung Electronics</span> — deep learning &amp; Android</span></div>
         </div>
 
         <div class="log-entry">
@@ -425,6 +434,8 @@
       <div class="section-head">
         <h2>Papers and a patent.</h2>
       </div>
+
+      <div class="mini-label">Papers</div>
 
       <div class="paper">
         <div class="tagno">01</div>
@@ -465,6 +476,8 @@
         </div>
       </div>
 
+      <div class="mini-label spaced">Patents</div>
+
       <div class="patent-box">
         <span class="k">Patent</span>
         <h4>Method and system for virtually monitoring the mood of an infant in an anti-infection cradle and automatically performing remedial actions</h4>
@@ -484,27 +497,34 @@
 
       <div class="layers">
         <div class="layer">
-          <div class="ltag"><b>L4</b>APPLICATION</div>
+          <div class="ltag">APPLICATION</div>
           <div class="chips"><span class="chip">Kotlin</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">Android Studio</span></div>
         </div>
         <div class="layer">
-          <div class="ltag"><b>L3</b>MODELING</div>
+          <div class="ltag">MODELING</div>
           <div class="chips"><span class="chip">TensorFlow</span><span class="chip">PyTorch</span><span class="chip">ONNX</span><span class="chip">scikit-learn</span><span class="chip">Pandas</span><span class="chip">NumPy</span></div>
         </div>
         <div class="layer">
-          <div class="ltag"><b>L2</b>INFRA</div>
+          <div class="ltag">INFRA</div>
           <div class="chips"><span class="chip">GCP</span><span class="chip">Vertex AI</span><span class="chip">GCS</span></div>
         </div>
         <div class="layer">
-          <div class="ltag"><b>L1</b>TOOLING</div>
+          <div class="ltag">TOOLING</div>
           <div class="chips"><span class="chip">Git</span><span class="chip">Jenkins</span><span class="chip">JIRA</span></div>
         </div>
       </div>
 
+      <div class="mini-label spaced">Certification</div>
       <div class="cert-row">
         <span class="chip">✓ Google Professional Machine Learning Engineer</span>
       </div>
-      <div class="build-tag">// education: B.Tech, Instrumentation Engineering (major) · Electronics &amp; Communication (minor) — NIT Jalandhar, 2022. Coursework: Data Structures, Algorithms, Database Systems.</div>
+
+      <div class="mini-label spaced">Education</div>
+      <div class="edu-block">
+        <h4>Dr. B R Ambedkar National Institute of Technology (NIT), Jalandhar, India</h4>
+        <p>B.Tech, Instrumentation Engineering (Major) &middot; Electronics &amp; Communication Engineering (Minor) — 2022</p>
+        <p>Coursework: Data Structures, Algorithms, Database Systems.</p>
+      </div>
     </div>
   </section>
 
@@ -516,15 +536,15 @@
         <h2 style="font-size:22px;">The process that's been running in the background since 2021.</h2>
         <p class="sub">A side collection from travels and everyday walks — no pipeline, just instinct.</p>
       </div>
-      <div class="idle-strip" id="gallery">
-        <div class="idle-shot" data-cap="Old Man of Storr, Scotland"><img src="photos/cliff.jpg" alt="Old Man of Storr, Scotland" loading="lazy"><div class="cap">Scotland</div></div>
-        <div class="idle-shot" data-cap="Castle, Edinburgh"><img src="photos/fort_image.jpg" alt="Castle, Edinburgh" loading="lazy"><div class="cap">Edinburgh</div></div>
-        <div class="idle-shot" data-cap="Leadenhall Market, London"><img src="photos/leaden_hall.jpg" alt="Leadenhall Market, London" loading="lazy"><div class="cap">London</div></div>
-        <div class="idle-shot" data-cap="Big Ben, London"><img src="photos/london-tower.jpg" alt="Big Ben, London" loading="lazy"><div class="cap">London</div></div>
-        <div class="idle-shot" data-cap="AECS Layout, Bangalore"><img src="photos/aecs_layout.jpeg" alt="AECS Layout, Bangalore" loading="lazy"><div class="cap">Bangalore</div></div>
-        <div class="idle-shot" data-cap="Royal Observatory, London"><img src="photos/observatory.jpeg" alt="Royal Observatory, London" loading="lazy"><div class="cap">London</div></div>
-        <div class="idle-shot" data-cap="London Eye"><img src="photos/london_eye.jpeg" alt="London Eye" loading="lazy"><div class="cap">London</div></div>
-        <div class="idle-shot" data-cap="Paradise Beach, Pondicherry"><img src="photos/paradise_beach.jpeg" alt="Paradise Beach, Pondicherry" loading="lazy"><div class="cap">Pondicherry</div></div>
+      <div class="photo-grid" id="gallery">
+        <figure class="photo-tile wide" data-cap="Old Man of Storr, Scotland"><img src="photos/cliff.jpg" alt="Old Man of Storr, Scotland" loading="lazy"><figcaption>Scotland</figcaption></figure>
+        <figure class="photo-tile" data-cap="Castle, Edinburgh"><img src="photos/fort_image.jpg" alt="Castle, Edinburgh" loading="lazy"><figcaption>Edinburgh</figcaption></figure>
+        <figure class="photo-tile tall" data-cap="Leadenhall Market, London"><img src="photos/leaden_hall.jpg" alt="Leadenhall Market, London" loading="lazy"><figcaption>London</figcaption></figure>
+        <figure class="photo-tile" data-cap="Big Ben, London"><img src="photos/london-tower.jpg" alt="Big Ben, London" loading="lazy"><figcaption>London</figcaption></figure>
+        <figure class="photo-tile wide" data-cap="AECS Layout, Bangalore"><img src="photos/aecs_layout.jpeg" alt="AECS Layout, Bangalore" loading="lazy"><figcaption>Bangalore</figcaption></figure>
+        <figure class="photo-tile tall" data-cap="Royal Observatory, London"><img src="photos/observatory.jpeg" alt="Royal Observatory, London" loading="lazy"><figcaption>London</figcaption></figure>
+        <figure class="photo-tile" data-cap="London Eye"><img src="photos/london_eye.jpeg" alt="London Eye" loading="lazy"><figcaption>London</figcaption></figure>
+        <figure class="photo-tile tall" data-cap="Paradise Beach, Pondicherry"><img src="photos/paradise_beach.jpeg" alt="Paradise Beach, Pondicherry" loading="lazy"><figcaption>Pondicherry</figcaption></figure>
       </div>
     </div>
   </section>
@@ -537,14 +557,24 @@
       <p>Open to conversations about ML engineering, on-device AI, or research collaborations.</p>
       <div class="contact-cta">
         <a class="btn primary" href="mailto:ktuneer@gmail.com">Email me →</a>
-        <a class="btn ghost" href="https://github.com/tuneerk" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/tuneer-khargonkar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/tuneerk" target="_blank" rel="noopener">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.78 2.71 1.27 3.37.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.42.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.21 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/tuneer-khargonkar/" target="_blank" rel="noopener">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          LinkedIn
+        </a>
       </div>
     </div>
     <div class="wrap">
       <footer>
         <span>© <span id="year"></span> Tuneer Khargonkar. All rights reserved.</span>
-        <span><a href="https://github.com/tuneerk" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/tuneer-khargonkar/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:ktuneer@gmail.com">Email</a></span>
+        <span>
+          <a href="https://github.com/tuneerk" target="_blank" rel="noopener"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.78 2.71 1.27 3.37.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.26 5.68.42.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.21 0 .31.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>GitHub</a>
+          <a href="https://www.linkedin.com/in/tuneer-khargonkar/" target="_blank" rel="noopener"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn</a>
+          <a href="mailto:ktuneer@gmail.com">Email</a>
+        </span>
       </footer>
     </div>
   </section>
@@ -554,15 +584,8 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const overlay = document.getElementById('navOverlay');
-  document.getElementById('menuOpen').addEventListener('click', () => overlay.classList.add('open'));
-  document.getElementById('navClose').addEventListener('click', () => overlay.classList.remove('open'));
-  document.querySelectorAll('#navList a').forEach(a=>{
-    a.addEventListener('click', () => overlay.classList.remove('open'));
-  });
-
   const sections = document.querySelectorAll('main section');
-  const navLinks = document.querySelectorAll('#navList a');
+  const navLinks = document.querySelectorAll('#topbarNav a');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -576,7 +599,7 @@
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightboxImg');
   const lbCap = document.getElementById('lightboxCap');
-  document.querySelectorAll('.idle-shot').forEach(shot=>{
+  document.querySelectorAll('.photo-tile').forEach(shot=>{
     shot.addEventListener('click', ()=>{
       const img = shot.querySelector('img');
       lbImg.src = img.src; lbImg.alt = img.alt; lbCap.textContent = shot.dataset.cap;
