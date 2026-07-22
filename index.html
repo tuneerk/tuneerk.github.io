@@ -190,22 +190,54 @@
   }
   .mini-label.spaced{margin-top:44px;}
   .paper{
-    display:grid; grid-template-columns:64px 1fr; gap:22px; padding:26px;
+    display:grid; grid-template-columns:56px 1fr; gap:20px; padding:26px;
     border:1px solid var(--line); background:var(--bg-deep); margin-bottom:16px;
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
   }
   .paper:last-of-type{margin-bottom:0;}
-  .paper .tagno{font-family:var(--mono); color:var(--ink-faint); font-size:12.5px; padding-top:4px;}
-  .paper h3{font-family:var(--sans); font-weight:600; font-size:19px; line-height:1.4; margin-bottom:8px;}
-  .paper .byline{color:var(--green); font-family:var(--mono); font-size:12.5px; margin-bottom:4px;}
-  .paper .venue{color:var(--ink-dim); font-size:13.5px; margin-bottom:14px;}
-  .paper .links a{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.02em; text-decoration:none; color:var(--ink);
-    border-bottom:1px solid var(--amber); margin-right:22px; padding-bottom:2px;
+  .paper:hover{
+    border-color:var(--amber-dim); transform:translateY(-3px);
+    box-shadow:0 10px 28px rgba(0,0,0,0.28);
   }
-  .patent-box{padding:26px; border:1px solid var(--line); background:var(--bg-deep);}
+  @media (prefers-reduced-motion: reduce){ .paper:hover{transform:none;} }
+  .paper .pub-index{
+    font-family:var(--mono); color:var(--green); font-size:13px; padding-top:4px; white-space:nowrap;
+  }
+  .paper .pub-index::before{content:"[";}
+  .paper .pub-index::after{content:"]";}
+  .pub-top{display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;}
+  .pub-badge{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--amber); border:1px solid var(--amber-dim); padding:4px 10px;
+  }
+  .paper h3{font-family:var(--sans); font-weight:600; font-size:19px; line-height:1.4; margin-bottom:10px;}
+  .paper .pub-note{color:var(--ink-dim); font-size:14.5px; line-height:1.6; margin-bottom:14px; max-width:62ch;}
+  .paper .byline{color:var(--green); font-family:var(--mono); font-size:12px; margin-bottom:16px;}
+  .paper .links{display:flex; flex-wrap:wrap; gap:10px;}
+  .paper .links a{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.03em; text-transform:uppercase;
+    text-decoration:none; color:var(--ink-dim); border:1px solid var(--line); padding:7px 12px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .paper .links a:hover{color:var(--amber); border-color:var(--amber-dim);}
+  .patent-box{
+    padding:26px; border:1px solid var(--line); background:var(--bg-deep);
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .patent-box:hover{
+    border-color:var(--amber-dim); transform:translateY(-3px);
+    box-shadow:0 10px 28px rgba(0,0,0,0.28);
+  }
+  @media (prefers-reduced-motion: reduce){ .patent-box:hover{transform:none;} }
   .patent-box .k{font-family:var(--mono); font-size:11.5px; color:var(--amber); letter-spacing:0.1em; text-transform:uppercase;}
-  .patent-box h4{font-family:var(--sans); font-weight:600; font-size:17px; margin:10px 0 6px;}
-  .patent-box .num{color:var(--ink-dim); font-family:var(--mono); font-size:12.5px;}
+  .patent-box .k::before{content:"[";}
+  .patent-box .k::after{content:"]";}
+  .patent-box h4{font-family:var(--sans); font-weight:600; font-size:17px; margin:12px 0 10px;}
+  .patent-box .pub-note{color:var(--ink-dim); font-size:14.5px; line-height:1.6; margin:0 0 14px; max-width:62ch;}
+  .patent-box .num{
+    display:inline-block; font-family:var(--mono); font-size:12px; color:var(--ink-dim);
+    border:1px solid var(--line); padding:6px 12px;
+  }
 
   /* ---------- STACK & RESUME ---------- */
   #stack{background-color:var(--bg);}
@@ -460,11 +492,12 @@
       <div class="mini-label">Papers</div>
 
       <div class="paper">
-        <div class="tagno">01</div>
+        <div class="pub-index">01</div>
         <div>
+          <div class="pub-top"><span class="pub-badge">ISEC &middot; 2025</span></div>
           <h3>Dominant Hand Detection Using Base Smartphone Sensors</h3>
+          <p class="pub-note">Identifies which hand is holding a phone using only its built-in accelerometer and gyroscope — no camera or calibration step required.</p>
           <div class="byline">Tuneer Khargonkar, Prasoon Singh, Shilpa Singh, Sumit Kumar</div>
-          <div class="venue">Innovations in Software Engineering (ISEC), 2025</div>
           <div class="links">
             <a href="https://dl.acm.org/doi/10.1145/3717383.3717393" target="_blank" rel="noopener">View abstract</a>
             <a href="https://dl.acm.org/doi/pdf/10.1145/3717383.3717393" target="_blank" rel="noopener">Download PDF</a>
@@ -473,11 +506,12 @@
       </div>
 
       <div class="paper">
-        <div class="tagno">02</div>
+        <div class="pub-index">02</div>
         <div>
+          <div class="pub-top"><span class="pub-badge">ISCAS &middot; 2023</span></div>
           <h3>SeLiNet: Sentiment-Enriched Lightweight Network for Emotion Recognition in Images</h3>
+          <p class="pub-note">A lightweight neural network that reads emotional sentiment from images, built to run efficiently on resource-constrained hardware.</p>
           <div class="byline">Tuneer Khargonkar, Shwetank Choudhary, Sumit Kumar</div>
-          <div class="venue">International Symposium on Circuits and Systems (ISCAS), 2023</div>
           <div class="links">
             <a href="https://arxiv.org/abs/2307.02773" target="_blank" rel="noopener">View on arXiv</a>
             <a href="https://arxiv.org/pdf/2307.02773" target="_blank" rel="noopener">Download PDF</a>
@@ -486,11 +520,12 @@
       </div>
 
       <div class="paper">
-        <div class="tagno">03</div>
+        <div class="pub-index">03</div>
         <div>
+          <div class="pub-top"><span class="pub-badge">MDPI &middot; 2022</span></div>
           <h3>Automatic Rice Disease Detection and Assistance Framework Using Deep Learning and a Chatbot</h3>
+          <p class="pub-note">Pairs a deep learning classifier with a conversational chatbot to help farmers identify rice crop diseases and get treatment guidance.</p>
           <div class="byline">Tuneer Khargonkar, Siddhi Jain, Rahul Sahni</div>
-          <div class="venue">MDPI — Electronics, 2022</div>
           <div class="links">
             <a href="https://www.mdpi.com/2079-9292/11/14/2110" target="_blank" rel="noopener">View paper</a>
             <a href="https://www.mdpi.com/2079-9292/11/14/2110/pdf?version=1657088777" target="_blank" rel="noopener">Download PDF</a>
@@ -503,6 +538,7 @@
       <div class="patent-box">
         <span class="k">Patent</span>
         <h4>Method and system for virtually monitoring the mood of an infant in an anti-infection cradle and automatically performing remedial actions</h4>
+        <p class="pub-note">A system for remotely monitoring an infant's mood inside an enclosed cradle and automatically triggering corrective actions.</p>
         <span class="num">Patent No. IN 202111011104</span>
       </div>
     </div>
