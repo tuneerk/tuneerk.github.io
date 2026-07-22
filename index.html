@@ -22,8 +22,11 @@
     --amber:#e8a33d;
     --amber-dim:#a97627;
     --green:#7fbf9e;
-    --google:#8ab4f8;
-    --samsung:#c58af9;
+    --samsung:#ffffff;
+    --g-blue:#4285f4;
+    --g-red:#ea4335;
+    --g-yellow:#fbbc05;
+    --g-green:#34a853;
     --radius:1px;
     --maxw:1180px;
     --mono:'JetBrains Mono', monospace;
@@ -57,8 +60,11 @@
   .eyebrow .idx{color:var(--ink-faint);}
   .eyebrow .tag{color:var(--ink-dim);}
 
-  .co-google{color:var(--google);}
   .co-samsung{color:var(--samsung);}
+  .gl-b{color:var(--g-blue);}
+  .gl-r{color:var(--g-red);}
+  .gl-y{color:var(--g-yellow);}
+  .gl-g{color:var(--g-green);}
 
   /* corner registration marks, like a technical drawing sheet */
   .sheet{position:relative;}
@@ -368,7 +374,7 @@
     <div class="wrap">
       <div>
         <div class="hero-name">Tuneer Khargonkar</div>
-        <div class="eyebrow hero-eyebrow">// ai engineer @ <span class="co-google">google</span> · ex-<span class="co-samsung">samsung research</span></div>
+        <div class="eyebrow hero-eyebrow">// ai engineer @ <span class="gl-b">g</span><span class="gl-r">o</span><span class="gl-y">o</span><span class="gl-b">g</span><span class="gl-g">l</span><span class="gl-r">e</span> &middot; ex-<span class="co-samsung">samsung research</span></div>
         <h1>I build machine learning systems — and <span class="hl">ship</span> them to production.</h1>
         <p class="lede">Currently building end-to-end ML on GCP at Google. Before that, two and a half years on on-device AI at Samsung Research — model compression, edge deployment, and applied research published at ISCAS and ISEC. Photography is the background process that's been running since 2021.</p>
         <div class="cta-row">
@@ -397,13 +403,13 @@
       <div class="about-grid" style="margin-top:36px;">
         <div>
           <h2 style="font-family:var(--sans); font-weight:600; font-size:26px; margin-bottom:20px;">Instrumentation → deep learning → production ML.</h2>
-          <p>I started in instrumentation and electronics at NIT Jalandhar, then moved into data science and deep learning — first on computer vision for agriculture, then at <span class="co-samsung">Samsung Research</span> building on-device AI: emotion recognition, image effects, and sensor models that run entirely on a phone, not a server.</p>
-          <p>Now I'm an AI Engineer at <span class="co-google">Google</span>, building end-to-end ML systems on GCP — forecasting frameworks powered by LLMs, retrieval-augmented chat, the kind of work that has to hold up in production, not just in a notebook. Photography stays in the loop too: I ran a university photography club, and I still shoot — mostly travel and street work — for the same reason I like ML: deciding what to keep in frame and what to leave out.</p>
+          <p>I started in instrumentation and electronics at NIT Jalandhar, then moved into data science and deep learning — first on computer vision for agriculture, then at Samsung Research building on-device AI: emotion recognition, image effects, and sensor models that run entirely on a phone, not a server.</p>
+          <p>Now I'm an AI Engineer at Google, building end-to-end ML systems on GCP — forecasting frameworks powered by LLMs, retrieval-augmented chat, the kind of work that has to hold up in production, not just in a notebook. Photography stays in the loop too: I ran a university photography club, and I still shoot — mostly travel and street work — for the same reason I like ML: deciding what to keep in frame and what to leave out.</p>
         </div>
         <div class="config">
           <div class="head">profile.yaml</div>
           <div class="body">
-            <div class="row"><span class="k">role</span><span class="colon">:</span><span class="v">AI Engineer, <span class="co-google">Google LLC</span></span></div>
+            <div class="row"><span class="k">role</span><span class="colon">:</span><span class="v">AI Engineer, Google LLC</span></div>
             <div class="row"><span class="k">location</span><span class="colon">:</span><span class="v">Bengaluru, India</span></div>
             <div class="row"><span class="k">focus</span><span class="colon">:</span><span class="v">on-device AI, applied ML, LLM systems</span></div>
             <div class="row"><span class="k">education</span><span class="colon">:</span><span class="v">B.Tech, NIT Jalandhar '22</span></div>
@@ -426,7 +432,7 @@
       <div class="log">
 
         <div class="log-entry major">
-          <div class="log-line"><span class="log-hash">9f0a41c</span><span class="log-date">Dec 2024 → present</span><span class="log-msg">AI Engineer, <span class="co-google">Google LLC</span> — Bengaluru</span></div>
+          <div class="log-line"><span class="log-hash">9f0a41c</span><span class="log-date">Dec 2024 → present</span><span class="log-msg">AI Engineer, Google LLC — Bengaluru</span></div>
           <ul class="log-body">
             <li>Built a trend analysis and forecasting framework powered by large language models.</li>
             <li>Shipped a question-and-answer chatbot using LLMs and retrieval-augmented generation (RAG).</li>
@@ -446,7 +452,7 @@
         </div>
 
         <div class="log-entry major">
-          <div class="log-line"><span class="log-hash">e02f6d1</span><span class="log-date">Jul 2022 → Dec 2024</span><span class="log-msg">Software Engineer, ML, <span class="co-samsung">Samsung Research</span> — Bengaluru</span></div>
+          <div class="log-line"><span class="log-hash">e02f6d1</span><span class="log-date">Jul 2022 → Dec 2024</span><span class="log-msg">Software Engineer, ML, Samsung Research — Bengaluru</span></div>
           <ul class="log-body">
             <li>Built an on-device 3D video-effects pipeline from a single input image — 80% user preference in test-group evaluation — using image segmentation and depth estimation.</li>
             <li>Developed a deep learning framework for emotion understanding from images, including data pre-processing and augmentation to improve data quality.</li>
@@ -461,7 +467,7 @@
         </div>
 
         <div class="log-entry">
-          <div class="log-line"><span class="log-hash">88d3e02</span><span class="log-date">2022</span><span class="log-msg">Intern, <span class="co-samsung">Samsung Electronics</span> — deep learning &amp; Android</span></div>
+          <div class="log-line"><span class="log-hash">88d3e02</span><span class="log-date">2022</span><span class="log-msg">Intern, Samsung Electronics — deep learning &amp; Android</span></div>
         </div>
 
         <div class="log-entry">
